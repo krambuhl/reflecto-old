@@ -1,0 +1,34 @@
+{
+  "name": "browserify-example",
+  "license": "MIT",
+  "scripts": {
+    "start": "serve dist",
+    "build": "gulp build",
+    "dev": "gulp dev"
+  },
+  "devDependencies": {
+    "aliasify": "^2.1.0",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babelify": "^7.3.0",
+    "browserify": "^14.4.0",
+    "browserify-markdown": "^2.0.1",
+    "gulp": "gulpjs/gulp.git#4.0",
+    "gulp-postcss": "^7.0.0",
+    "gulp-util": "^3.0.8",
+    "jss-preset-default": "^3.0.0",
+    "jss-template": "^0.1.1",
+    "merge-stream": "^1.0.1",
+    "postcss-cssnext": "^3.0.2",
+    "require-globify": "^1.4.1",
+    "vinyl-source-stream": "^1.1.0",
+    "watchify": "^3.9.0"
+  },
+  "dependencies": {
+    "bel": "^5.1.2",
+    "jss": "^8.1.0",
+    "postcss-import": "^11.0.0",
+    "reset-css": "^2.2.1",
+    "serve": "^6.1.0"
+  }
+}
