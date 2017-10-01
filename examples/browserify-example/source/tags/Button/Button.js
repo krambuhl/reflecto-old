@@ -20,13 +20,20 @@ export const Button = (props = { }, children = '') => {
 
 Button.styles = jss.createStyleSheet({
   root: {
-    border: '1px solid black',
+    appearance: 'none',
+    backgroundColor: 'white',
+    border: 'none',
     borderRadius: 0,
-    appearance: 'none'
+    color: 'black',
+    padding: '1em',
+    '&:hover': {
+      backgroundColor: 'black',
+      color: 'white'
+    }
   },
-  primary: { borderColor: 'red' },
-  secondary: { borderColor: 'grey' },
-  cta: { borderColor: 'blue' }
+  primary: { border: '1px solid black' },
+  secondary: { backgroundColor: 'grey' },
+  cta: { backgroundColor: 'yellow' }
 })
 
 export default Button
