@@ -2,7 +2,7 @@ const gulp = require('gulp')
 const reflecto = require('gulp-reflecto')
 const postcss = require('gulp-postcss')
 const cssnext = require('postcss-cssnext')
-const cssImport = require('postcss-import')
+const cssImport = require('postcss-easy-import')
 const watchify = require('watchify')
 const browserify = require('browserify')
 const source = require('vinyl-source-stream')
@@ -16,9 +16,11 @@ const mergeStream = require('merge-stream')
 const bundleFactory = (bundles) => ({ watchMode = false }) => {
   return function bundlerTask () {
     const streams = bundles.map((bundleConfig) => {
-      const opts = Object.assign({}, watchMode && watchify.args, {
-        debug: true
-      }, bundleConfig.browserifyOptions)
+      const opts = Object.assign(
+        { debug: true },
+        watchMode && watchify.args,
+        bundleConfig.browserifyOptions
+      )
       let bundler = browserify(bundleConfig.entry, opts)
 
       if (watchMode) {
@@ -29,8 +31,6 @@ const bundleFactory = (bundles) => ({ watchMode = false }) => {
       bundler.transform(babelify)
       bundler.transform(globify)
       bundler.transform(aliasify, {
-        // verbose: true,
-        // debug: true,
         replacements: {
           '@shared/(\\w+)': './source/@shared/$1',
           '@tags.(\\w+)': './source/tags/@tags.$1',
@@ -81,7 +81,10 @@ const bundleDev = bundler({ watchMode: true })
 
 function styles () {
   return gulp.src('./source/styles.css')
-    .pipe(postcss([ cssImport(), cssnext() ]))
+    .pipe(postcss([
+      cssImport(),
+      cssnext()
+    ]))
     .pipe(gulp.dest('./dist/assets'))
 }
 
@@ -106,25 +109,6 @@ function styleguide () {
         <script src="archive.js"></script>
         <script src="styleguide.js"></script>
       `
-    },
-    theme: {
-      colors: {
-        background: '#fff',
-        text: '#666',
-        active: '#4925a0',
-        inlineCode: '#4925a0',
-        tableHeaders: '#000',
-        tableRowBorder: '#999',
-        headerBackground: '#fff',
-        headerTitle: '#999',
-        headerLinks: '#666',
-        headerBorder: '#ddd',
-        exampleHeaderBackground: '#222',
-        exampleHeaderForeground: '#fff',
-        codeHeaderBackground: '#4925a0',
-        codeHeaderForeground: '#fff',
-        codeBackground: '#090226'
-      }
     }
   }
 
@@ -133,9 +117,11 @@ function styleguide () {
 }
 
 // define task sequences
-const build = gulp.series(gulp.parallel(bundleBuild, styles), styleguide)
-const dev = gulp.series(styles, styleguide, gulp.parallel(bundleDev, stylesDev))
+const styleguideTask = gulp.series(styleguide)
+const buildTask = gulp.series(gulp.parallel(bundleBuild, styles), styleguide)
+const devTask = gulp.series(styles, styleguide, gulp.parallel(bundleDev, stylesDev))
 
 // default external task api
-gulp.task('build', build)
-gulp.task('dev', dev)
+gulp.task('styleguide', styleguideTask)
+gulp.task('build', buildTask)
+gulp.task('dev', devTask)

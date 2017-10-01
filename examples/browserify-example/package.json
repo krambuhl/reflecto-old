@@ -3,6 +3,7 @@
   "license": "MIT",
   "scripts": {
     "start": "serve dist",
+    "styleguide": "gulp styleguide",
     "build": "gulp build",
     "dev": "gulp dev"
   },
@@ -27,7 +28,7 @@
   "dependencies": {
     "bel": "^5.1.2",
     "jss": "^8.1.0",
-    "postcss-import": "^11.0.0",
+    "postcss-easy-import": "^3.0.0",
     "reset-css": "^2.2.1",
     "serve": "^6.1.0"
   }
