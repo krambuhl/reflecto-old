@@ -1,5 +1,7 @@
+const path = require('path')
+
 const gulp = require('gulp')
-const reflecto = require('gulp-reflecto')
+const reflectoAssets = require('reflecto/assets')
 const postcss = require('gulp-postcss')
 const cssnext = require('postcss-cssnext')
 const cssImport = require('postcss-easy-import')
@@ -32,9 +34,7 @@ const bundleFactory = (bundles) => ({ watchMode = false }) => {
       bundler.transform(globify)
       bundler.transform(aliasify, {
         replacements: {
-          '@shared/(\\w+)': './source/@shared/$1',
-          '@tags.(\\w+)': './source/tags/@tags.$1',
-          '@components.(\\w+)': './source/components/@components.$1'
+          '@shared/(\\w+)': './source/@shared/$1'
         },
         aliases: {
           '@tags': './source/tags/@tags.elements',
@@ -68,6 +68,7 @@ const bundler = bundleFactory([{
   outputName: 'archive.js',
   outputDir: 'dist/styleguide',
   browserifyOptions: {
+    // expose the archive as a window module
     standalone: 'ElementArchive'
   }
 }, {
@@ -93,35 +94,25 @@ function stylesDev () {
 }
 
 function styleguide () {
-  const config = {
-    scriptName: 'styleguide.js',
-    stylesName: 'styles.css',
-    demoTemplate: {
+  return reflectoAssets({
+    scriptFileName: 'styleguide.js',
+    stylesFileName: 'styles.css',
+    demoContent: {
       head: '<link href="/assets/styles.css" rel="stylesheet">',
       foot: `
         <script src="archive.js"></script>
         <script src="demo.js"></script>
       `
     },
-    styleguideTemplate: {
-      head: '<link href="styles.css" rel="stylesheet">',
-      foot: `
-        <script src="archive.js"></script>
-        <script src="styleguide.js"></script>
-      `
-    }
-  }
-
-  return reflecto(config)
-    .pipe(gulp.dest('dist/styleguide'))
+    outputDirectory: path.resolve(__dirname, 'dist/styleguide')
+  })
 }
 
 // define task sequences
-const styleguideTask = gulp.series(styleguide)
 const buildTask = gulp.series(gulp.parallel(bundleBuild, styles), styleguide)
 const devTask = gulp.series(styles, styleguide, gulp.parallel(bundleDev, stylesDev))
 
 // default external task api
-gulp.task('styleguide', styleguideTask)
+gulp.task('styleguide', styleguide)
 gulp.task('build', buildTask)
 gulp.task('dev', devTask)

@@ -12,13 +12,13 @@ import {
 } from 'reflecto/archive'
 
 // import all project assets
-import Tags from '@tags'
-import TagExamples from '@tags.examples'
-import TagReadmes from '@tags.readmes'
+import Tags from './tags/@tags.elements'
+import TagExamples from './tags/@tags.examples'
+import TagReadmes from './tags/@tags.readmes'
 
-import Components from '@components'
-import ComponentExamples from '@components.examples'
-import ComponentReadmes from '@components.readmes'
+import Components from './components/@components.elements'
+import ComponentExamples from './components/@components.examples'
+import ComponentReadmes from './components/@components.readmes'
 
 // provide a list of all elements in the project
 export const allElements = flattenModules({
