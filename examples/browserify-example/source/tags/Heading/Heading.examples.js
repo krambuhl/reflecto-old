@@ -11,5 +11,5 @@ export default [{
 }, {
   title: 'Level 3 styling',
   component:
-    Heading({ variant: 'h3' }, 'Cum ab qui, quia vitae, eveniet voluptate.')
+    Heading({ variant: 'h3', className: 'whahat' }, 'Cum ab qui, quia vitae, eveniet voluptate.')
 }]

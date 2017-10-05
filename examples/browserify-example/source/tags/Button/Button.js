@@ -11,7 +11,7 @@ export const Button = (props = { }, children = '') => {
 
   const classStack = classList`${classes.root} ${classes[variant]} ${className}`
 
-  return html`
+  return html(props)`
     <button class="${classStack}" ${attrs}>
       ${children}
     </button>

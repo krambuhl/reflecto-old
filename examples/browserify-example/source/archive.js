@@ -86,15 +86,27 @@ export const getSchema = () => {
 // rendering
 
 // Provide render fn for browser
-export const renderComponentBrowser = (el, component) => {
-
-}
-
-// Provide render fn for node
-export const renderComponentServer = (component) => {
-  return component()
+export const renderComponent = (el, component) => {
+  console.log('rendering');
+  el.innerHTML = ''
+  if (typeof component === 'function') {
+    el.appendChild(component())
+  } else {
+    el.appendChild(component)
+  }
 }
 
 // routing / links
 export const createDemoLink = (type, name, id) =>
   `demo.html?type=${type}&name=${name}&id=${id}`
+
+// CSS
+
+// inject css from elements
+Object.keys(allElements).forEach((key) => {
+  const module = allElements[key]
+
+  if (module.styles) {
+    module.styles.attach()
+  }
+})

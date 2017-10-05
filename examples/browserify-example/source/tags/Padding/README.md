@@ -5,13 +5,13 @@ It's padding.
 
 ## Examples
 
-{{example-selector}}
+{{example.selector}}
 
 Prop Name | Type | Description | Value
 --- | --- | --- | ---
-`tagName` | String | Defines the element tagName. | {{props.tagName}}
+`variant` | String | Defines the element variant. | {{props.variant}}
 `className` | String | Defines CSS className to add to the component's class list. | {{props.className}}
 
-{{example-demo}}
+{{example.demo}}
 
-{{example-code}}
+{{example.code}}

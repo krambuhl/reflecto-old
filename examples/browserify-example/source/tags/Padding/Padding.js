@@ -11,7 +11,7 @@ export const Padding = (props = { }, children = '') => {
 
   const classStack = classList`${classes[variant]} ${className}`
 
-  return html`<div class="${classStack}" ${attrs}>${children}</div>`
+  return html(props)`<div class="${classStack}" ${attrs}>${children}</div>`
 }
 
 Padding.styles = jss.createStyleSheet({

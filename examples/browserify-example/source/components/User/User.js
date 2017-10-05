@@ -13,7 +13,7 @@ export const User = (props = { }) => {
 
   const classStack = classList`${classes.root} ${classes[variant]} ${className}`
 
-  return html`
+  return html(props)`
     <div class="${classStack}" ${attrs}>
       ${Heading({ level: 'h3' }, 'Sign In')}
       ${Button({ tagName: 'a', attrs: { href: '#' } }, 'Sign In')}

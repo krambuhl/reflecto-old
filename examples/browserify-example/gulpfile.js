@@ -1,7 +1,7 @@
 const path = require('path')
 
 const gulp = require('gulp')
-const reflectoAssets = require('reflecto/assets')
+const copyStyleguide = require('reflecto/styleguide')
 const postcss = require('gulp-postcss')
 const cssnext = require('postcss-cssnext')
 const cssImport = require('postcss-easy-import')
@@ -71,10 +71,6 @@ const bundler = bundleFactory([{
     // expose the archive as a window module
     standalone: 'ElementArchive'
   }
-}, {
-  entry: './source/demo.js',
-  outputName: 'demo.js',
-  outputDir: 'dist/styleguide'
 }])
 
 const bundleBuild = bundler({ watchMode: false })
@@ -94,15 +90,10 @@ function stylesDev () {
 }
 
 function styleguide () {
-  return reflectoAssets({
-    scriptFileName: 'styleguide.js',
-    stylesFileName: 'styles.css',
+  return copyStyleguide({
+    archiveName: 'ElementArchive',
     demoContent: {
       head: '<link href="/assets/styles.css" rel="stylesheet">',
-      foot: `
-        <script src="archive.js"></script>
-        <script src="demo.js"></script>
-      `
     },
     outputDirectory: path.resolve(__dirname, 'dist/styleguide')
   })
