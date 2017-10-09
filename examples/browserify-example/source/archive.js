@@ -40,6 +40,15 @@ export const allExamples = flattenModules({
 export const getExample = (type, name, id) =>
   allExamples[`${type}/${name}/${id}`]
 
+// gets all examples for an element
+export const getExamples = (type, name) =>
+  Object.keys(allExamples)
+    .filter((key) => key.indexOf(`${type}/${name}`) >= 0)
+    .reduce((all, key) => {
+      all[key] = allExamples[key]
+      return all
+    }, {})
+
 // provide a list of all readme files in the project
 export const allReadmes = flattenModules({
   Tags: TagReadmes,
@@ -87,7 +96,6 @@ export const getSchema = () => {
 
 // Provide render fn for browser
 export const renderComponent = (el, component) => {
-  console.log('rendering');
   el.innerHTML = ''
   if (typeof component === 'function') {
     el.appendChild(component())
