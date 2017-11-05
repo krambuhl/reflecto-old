@@ -11,6 +11,8 @@ import {
   filterByKey
 } from 'reflecto/archive'
 
+import * as Categories from '@shared/categories'
+
 // import all project assets
 import Tags from './tags/@tags.elements'
 import TagExamples from './tags/@tags.examples'
@@ -62,33 +64,21 @@ export const getReadme = (type, name) =>
 // defines a way to structure data in users
 // of the archive
 export const getSchema = () => {
-  const groups = [{
-    filter: filterByAttributes({ pageType: undefined })
-  }, {
-    title: 'Actions',
-    filter: filterByAttributes({ pageType: 'action' })
-  }, {
-    title: 'Forms',
-    filter: filterByAttributes({ pageType: 'form' })
-  }, {
-    title: 'Layout',
-    filter: filterByAttributes({ pageType: 'layout' })
-  }, {
-    title: 'Typography and Content',
-    filter: filterByAttributes({ pageType: 'content' })
-  }, {
-    title: 'Behavior',
-    filter: filterByAttributes({ pageType: 'behavior' })
-  }]
-
   return createSchema(allElements, [{
     title: 'Tags',
     filter: filterByKey(/Tags/),
-    groups
+    groups: [{
+      filter: filterByAttributes({ category: undefined })
+    }, {
+      title: 'Forms',
+      filter: filterByAttributes({ category: Categories.Form })
+    }, {
+      title: 'Layout',
+      filter: filterByAttributes({ category: Categories.Layout })
+    }]
   }, {
     title: 'Components',
-    filter: filterByKey(/Components/),
-    groups
+    filter: filterByKey(/Components/)
   }])
 }
 
@@ -105,8 +95,13 @@ export const renderComponent = (el, component) => {
 }
 
 // routing / links
-export const createDemoLink = (type, name, id) =>
-  `demo.html?type=${type}&name=${name}&id=${id}`
+export const createDemoLink = (type, name, id) => {
+  if (id === undefined) {
+    return `?type=${type}&name=${name}&id=${id}`
+  } else {
+    return `?type=${type}&name=${name}`
+  }
+}
 
 // CSS
 
