@@ -5,12 +5,14 @@ This is a User profile.
 
 ## Examples
 
-<div data-var="example.selector"></div>
+{{example-selector}}
 
 Prop Name | Type | Description | Value
 --- | --- | --- | ---
-`className` | String | Defines CSS className to add to the component's class list. | <div data-var="props.className"></div>
+`className` | String | Defines CSS className to add to the component's class list. | {{props.className}}
+`name` | String | The users name | {{props.name}}
+`hideAction` | Boolean | Hides the action button | {{props.hideAction}}
 
-<div data-var="example.demo"></div>
+{{example.demo}}
 
-<div data-var="example.code"></div>
+{{example.code}}

@@ -1,8 +1,10 @@
 import bel from 'bel'
 
+export const html = bel
+
 // wrap bel in a function to expose props to styleguide
-// call like html(props)`template`
-export const html = (props) => (...args) => {
+// call like component(props)`template`
+export const component = (props) => (...args) => {
   const res = bel(...args)
   res.props = props
   return res

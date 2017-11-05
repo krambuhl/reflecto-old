@@ -1,5 +1,6 @@
-import { html, classList } from '@shared/html'
+import { component, classList } from '@shared/html'
 import jss from '@shared/jss'
+import { Layout as LayoutCategory } from '@shared/categories'
 
 export const Padding = (props = { }, children = '') => {
   const { classes } = Padding.styles
@@ -11,7 +12,7 @@ export const Padding = (props = { }, children = '') => {
 
   const classStack = classList`${classes[variant]} ${className}`
 
-  return html(props)`<div class="${classStack}" ${attrs}>${children}</div>`
+  return component(props)`<div class="${classStack}" ${attrs}>${children}</div>`
 }
 
 Padding.styles = jss.createStyleSheet({
@@ -19,5 +20,7 @@ Padding.styles = jss.createStyleSheet({
   medium: { padding: '1em' },
   large: { padding: '2em' }
 })
+
+Padding.category = LayoutCategory
 
 export default Padding

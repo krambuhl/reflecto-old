@@ -66,7 +66,7 @@ const bundler = bundleFactory([{
 }, {
   entry: './source/archive.js',
   outputName: 'archive.js',
-  outputDir: 'dist/styleguide',
+  outputDir: 'dist',
   browserifyOptions: {
     // expose the archive as a window module
     standalone: 'ElementArchive'
@@ -93,9 +93,9 @@ function styleguide () {
   return copyStyleguide({
     archiveName: 'ElementArchive',
     demoContent: {
-      head: '<link href="/assets/styles.css" rel="stylesheet">',
+      head: '<link href="/assets/styles.css" rel="stylesheet">'
     },
-    outputDirectory: path.resolve(__dirname, 'dist/styleguide')
+    outputDirectory: 'dist'
   })
 }
 

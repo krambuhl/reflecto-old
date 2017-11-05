@@ -5,7 +5,8 @@
     "start": "serve dist",
     "styleguide": "gulp styleguide",
     "build": "gulp build",
-    "dev": "gulp dev"
+    "dev": "gulp dev",
+    "watch": "gulp watch"
   },
   "devDependencies": {
     "aliasify": "^2.1.0",

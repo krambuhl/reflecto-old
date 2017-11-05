@@ -1,5 +1,6 @@
-import { html, classList } from '@shared/html'
+import { component, classList } from '@shared/html'
 import jss from '@shared/jss'
+import { Form as FormCategory } from '@shared/categories'
 
 export const Button = (props = { }, children = '') => {
   const { classes } = Button.styles
@@ -11,7 +12,7 @@ export const Button = (props = { }, children = '') => {
 
   const classStack = classList`${classes.root} ${classes[variant]} ${className}`
 
-  return html(props)`
+  return component(props)`
     <button class="${classStack}" ${attrs}>
       ${children}
     </button>
@@ -35,5 +36,7 @@ Button.styles = jss.createStyleSheet({
   secondary: { backgroundColor: 'grey' },
   cta: { backgroundColor: 'yellow' }
 })
+
+Button.category = FormCategory
 
 export default Button

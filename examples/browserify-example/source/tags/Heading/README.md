@@ -7,13 +7,13 @@ Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nam amet dicta vero al
 
 ## Examples
 
-<div data-var="example.selector"></div>
+{{example-selector}}
 
 Prop Name | Type | Description | Value
 --- | --- | --- | ---
-`variant` | String | Defines the element variant. | <div data-var="props.variant"></div>
-`className` | String | Defines CSS className to add to the component's class list | <div data-var="props.className"></div>
+`variant` | String | Defines the element variant. | {{props.variant}}
+`className` | String | Defines CSS className to add to the component's class list | {{props.className}}
 
-<div data-var="example.demo"></div>
+{{example.demo}}
 
-<div data-var="example.code"></div>
+{{example.code}}
