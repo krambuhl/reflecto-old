@@ -107,3 +107,7 @@ const devTask = gulp.series(styles, styleguide, gulp.parallel(bundleDev, stylesD
 gulp.task('styleguide', styleguide)
 gulp.task('build', buildTask)
 gulp.task('dev', devTask)
+
+gulp.task('watch', () => {
+  gulp.watch('../../../reflecto-styleguide/dist/**/*', gulp.series('styleguide'))
+})
