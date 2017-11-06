@@ -39,8 +39,16 @@ export const allExamples = flattenModules({
 }, {})
 
 // provide an outlet to find an element's example
-export const getExample = (type, name, id) =>
-  allExamples[`${type}/${name}/${id}`]
+export const getExample = (type, name, id) => {
+  if (id) {
+    return allExamples[`${type}/${name}/${id}`]
+  } else {
+    const defaultLookup = `${type}/${name}/`
+    const matches = Object.keys(allExamples)
+      .filter(key => key.indexOf(defaultLookup) !== -1)
+    return allExamples[matches[0]]
+  }
+}
 
 // gets all examples for an element
 export const getExamples = (type, name) =>
