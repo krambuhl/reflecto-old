@@ -1,5 +1,5 @@
 {
-  "name": "browserify-example",
+  "name": "reflecto-browserify-bel-example",
   "license": "MIT",
   "scripts": {
     "start": "serve dist",
