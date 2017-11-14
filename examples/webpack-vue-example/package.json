@@ -1,0 +1,29 @@
+{
+  "name": "reflecto-vue-example",
+  "license": "MIT",
+  "scripts": {
+    "start": "serve dist",
+    "styleguide": "gulp styleguide",
+    "build": "gulp build",
+    "dev": "gulp dev",
+    "watch": "gulp watch"
+  },
+  "devDependencies": {
+    "reset-css": "^2.2.1",
+    "vue": "^2.4.4",
+    "vuex": "^2.4.1"
+  },
+  "dependencies": {
+    "babel-loader": "^7.1.2",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-env": "^1.6.0",
+    "css-loader": "^0.28.7",
+    "postcss-cssnext": "^3.0.2",
+    "postcss-loader": "^2.0.6",
+    "postcss-nested": "^2.1.2",
+    "serve": "^6.1.0",
+    "vue-loader": "^13.0.5",
+    "vue-template-compiler": "^2.4.4",
+    "webpack": "^3.6.0",
+  }
+}
