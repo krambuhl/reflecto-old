@@ -1,123 +1,68 @@
 // This is an archive file, it contains:
 // - all project elements, examples, and readmes
-// - a way to access elements, examples, and readmes
 // - a way to categorize and structure elements
 // - utilities for rendering elements
 
 import {
-  flattenModules,
-  createSchema,
-  filterByAttributes,
-  filterByKey
-} from 'reflecto/archive'
+  mapModules,
+  mapExamples,
+  createSchema
+} from 'reflecto-archive'
 
 import * as Categories from '@shared/categories'
 
 // import all project assets
-import Tags from './tags/@tags.elements'
-import TagExamples from './tags/@tags.examples'
-import TagReadmes from './tags/@tags.readmes'
+import Tags from '@tags.elements'
+import TagExamples from '@tags.examples'
+import TagReadmes from '@tags.readmes'
 
-import Components from './components/@components.elements'
-import ComponentExamples from './components/@components.examples'
-import ComponentReadmes from './components/@components.readmes'
+import Components from '@components.elements'
+import ComponentExamples from '@components.examples'
+import ComponentReadmes from '@components.readmes'
 
-// provide a list of all elements in the project
-export const allElements = flattenModules({
-  Tags,
-  Components
-}, {})
+const tagType = { type: 'tags' }
+const componentType = { type: 'components' }
 
-// provide an outlet to find an element
-export const getElement = (type, name) =>
-  allElements[`${type}/${name}`]
+// export all elements
+export const elements = [
+  ...mapModules(Tags, tagType),
+  ...mapModules(Components, componentType)
+]
 
-// provide a list of all example files in the project
-export const allExamples = flattenModules({
-  Tags: TagExamples,
-  Components: ComponentExamples
-}, {})
+// export all examples
+export const examples = [
+  ...mapExamples(TagExamples, tagType),
+  ...mapExamples(ComponentExamples, componentType)
+]
 
-// provide an outlet to find an element's example
-export const getExample = (type, name, id) => {
-  if (id) {
-    return allExamples[`${type}/${name}/${id}`]
-  } else {
-    const defaultLookup = `${type}/${name}/`
-    const matches = Object.keys(allExamples)
-      .filter(key => key.indexOf(defaultLookup) !== -1)
-    return allExamples[matches[0]]
-  }
-}
-
-// gets all examples for an element
-export const getExamples = (type, name) =>
-  Object.keys(allExamples)
-    .filter((key) => key.indexOf(`${type}/${name}`) >= 0)
-    .reduce((all, key) => {
-      all[key] = allExamples[key]
-      return all
-    }, {})
-
-// provide a list of all readme files in the project
-export const allReadmes = flattenModules({
-  Tags: TagReadmes,
-  Components: ComponentReadmes
-}, {})
-
-// provide an outlet to find a element's readme
-export const getReadme = (type, name) =>
-  allReadmes[`${type}/${name}`]
+// export all readmes
+export const readmes = [
+  ...mapModules(TagReadmes, tagType),
+  ...mapModules(ComponentReadmes, componentType)
+]
 
 // defines a way to structure data in users
 // of the archive
-export const getSchema = () => {
-  return createSchema(allElements, [{
+export const schema =
+  createSchema(elements, [{
     title: 'Tags',
-    filter: filterByKey(/Tags/),
+    filter: def => def.type === 'tags',
     groups: [{
-      filter: filterByAttributes({ category: undefined })
+      filter: def => def.module.category === undefined
     }, {
       title: 'Forms',
-      filter: filterByAttributes({ category: Categories.Form })
+      filter: def => def.module.category === Categories.Form
     }, {
       title: 'Layout',
-      filter: filterByAttributes({ category: Categories.Layout })
+      filter: def => def.module.category === Categories.Layout
     }]
   }, {
     title: 'Components',
-    filter: filterByKey(/Components/)
+    filter: def => def.type === 'components'
   }])
-}
-
-// rendering
 
 // Provide render fn for browser
 export const renderComponent = (el, component) => {
   el.innerHTML = ''
-  if (typeof component === 'function') {
-    el.appendChild(component())
-  } else {
-    el.appendChild(component)
-  }
+  el.appendChild(component)
 }
-
-// routing / links
-export const createDemoLink = (type, name, id) => {
-  if (id === undefined) {
-    return `?type=${type}&name=${name}&id=${id}`
-  } else {
-    return `?type=${type}&name=${name}`
-  }
-}
-
-// CSS
-
-// inject css from elements
-Object.keys(allElements).forEach((key) => {
-  const module = allElements[key]
-
-  if (module.styles) {
-    module.styles.attach()
-  }
-})
