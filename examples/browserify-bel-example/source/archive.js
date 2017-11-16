@@ -20,25 +20,32 @@ import Components from '@components.elements'
 import ComponentExamples from '@components.examples'
 import ComponentReadmes from '@components.readmes'
 
-const tagType = { type: 'tags' }
-const componentType = { type: 'components' }
+const transformTags = (def) => {
+  def.type = 'tags'
+  return def
+}
+
+const transformComponents = (def) => {
+  def.type = 'components'
+  return def
+}
 
 // export all elements
 export const elements = [
-  ...mapModules(Tags, tagType),
-  ...mapModules(Components, componentType)
+  ...mapModules(Tags).map(transformTags),
+  ...mapModules(Components).map(transformComponents)
 ]
 
 // export all examples
 export const examples = [
-  ...mapExamples(TagExamples, tagType),
-  ...mapExamples(ComponentExamples, componentType)
+  ...mapExamples(TagExamples).map(transformTags),
+  ...mapExamples(ComponentExamples).map(transformComponents)
 ]
 
 // export all readmes
 export const readmes = [
-  ...mapModules(TagReadmes, tagType),
-  ...mapModules(ComponentReadmes, componentType)
+  ...mapModules(TagReadmes).map(transformTags),
+  ...mapModules(ComponentReadmes).map(transformComponents)
 ]
 
 // defines a way to structure data in users
@@ -66,3 +73,11 @@ export const renderComponent = (el, component) => {
   el.innerHTML = ''
   el.appendChild(component)
 }
+
+// inject css from elements
+elements.forEach(({ module }) => {
+  console.log(module.styles);
+  if (module.styles) {
+    module.styles.attach()
+  }
+})
