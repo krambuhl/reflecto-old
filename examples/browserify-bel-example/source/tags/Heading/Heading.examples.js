@@ -1,7 +1,6 @@
-import { Heading } from './Heading'
+import { Heading } from '@tags'
 
 export default [{
-  id: 'heading-1',
   title: 'Level 1 styling (default)',
   component:
     Heading({ variant: 'h1' }, 'Lorem ipsum dolor sit amet, consectetur.')

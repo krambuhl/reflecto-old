@@ -1,4 +1,4 @@
-import { Padding } from './Padding'
+import { Padding } from '@tags'
 
 export default [{
   title: 'Normal padding (default)',

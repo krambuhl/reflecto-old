@@ -1,5 +1,3 @@
-const path = require('path')
-
 const gulp = require('gulp')
 const copyStyleguide = require('reflecto/styleguide')
 const postcss = require('gulp-postcss')
@@ -34,7 +32,9 @@ const bundleFactory = (bundles) => ({ watchMode = false }) => {
       bundler.transform(globify)
       bundler.transform(aliasify, {
         replacements: {
-          '@shared/(\\w+)': './source/@shared/$1'
+          '@shared/(\\w+)': './source/@shared/$1',
+          '@tags.(\\w+)': './source/tags/@tags.$1',
+          '@components.(\\w+)': './source/components/@components.$1'
         },
         aliases: {
           '@tags': './source/tags/@tags.elements',

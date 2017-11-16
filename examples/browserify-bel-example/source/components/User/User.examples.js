@@ -1,4 +1,4 @@
-import { User } from './User'
+import { User } from '@components'
 
 export default [{
   title: 'Normal styling with sign-in button (default)',
