@@ -60,10 +60,6 @@ const bundleFactory = (bundles) => ({ watchMode = false }) => {
 }
 
 const bundler = bundleFactory([{
-  entry: './source/bundle.js',
-  outputName: 'bundle.js',
-  outputDir: 'dist/assets'
-}, {
   entry: './source/archive.js',
   outputName: 'archive.js',
   outputDir: 'dist',
