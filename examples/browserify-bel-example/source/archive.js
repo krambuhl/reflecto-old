@@ -76,7 +76,6 @@ export const renderComponent = (el, component) => {
 
 // inject css from elements
 elements.forEach(({ module }) => {
-  console.log(module.styles);
   if (module.styles) {
     module.styles.attach()
   }
