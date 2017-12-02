@@ -3,6 +3,7 @@
 </template>
 
 <script>
+import * as Categories from '@shared/categories'
 export default {
   name: 'ActionButton',
   props: {
@@ -10,7 +11,8 @@ export default {
       type: String,
       default: 'primary'
     }
-  }
+  },
+  category: Categories.Form
 }
 </script>
 
