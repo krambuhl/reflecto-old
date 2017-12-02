@@ -1,6 +1,6 @@
 {
   "name": "reflecto",
-  "description": "A tool for creating component libraries",
+  "description": "A tool for creating component based websites",
   "version": "1.0.0",
   "main": "index.js",
   "repository": "git@github.com:krambuhl/reflecto-archive.git",
@@ -13,5 +13,9 @@
     "eslint-plugin-node": "^5.1.1",
     "eslint-plugin-promise": "^3.5.0",
     "eslint-plugin-standard": "^3.0.1"
+  },
+  "dependencies": {
+    "reflecto-archive": "krambuhl/reflecto-archive",
+    "reflecto-styleguide": "krambuhl/reflecto-styleguide"
   }
 }
