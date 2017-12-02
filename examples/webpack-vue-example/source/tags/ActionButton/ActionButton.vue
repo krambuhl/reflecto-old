@@ -4,7 +4,7 @@
 
 <script>
 export default {
-  name: 'Button',
+  name: 'ActionButton',
   props: {
     variant: {
       type: String,
@@ -31,5 +31,5 @@ export default {
 
   .primary { border: 1px solid black; },
   .secondary { background-color: grey; },
-  .cta { background-color: 'yellow' }
+  .cta { background-color: yellow; }
 </style>
