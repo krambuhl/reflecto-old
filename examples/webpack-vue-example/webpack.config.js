@@ -4,7 +4,8 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const WebpackOnBuildPlugin = require('on-build-webpack')
 const copyStyleguide = require('reflecto-styleguide')
 
-const { dest, source } = require('./helpers')
+const source = (...paths) => path.resolve(__dirname, 'source', ...paths)
+const dest = (...paths) => path.resolve(__dirname, 'dist', ...paths)
 
 module.exports = {
   devtool: 'inline-source-map',
@@ -14,7 +15,7 @@ module.exports = {
   output: {
     path: dest(),
     filename: '[name].js',
-    library: 'ElementArchive',
+    library: 'ElementArchive', // export the archive to the window
     libraryTarget: 'umd'
   },
   resolve: {
@@ -37,8 +38,8 @@ module.exports = {
       })
     }),
     new HtmlWebpackPlugin({
-      filename: 'demo.html',
-      template: path.resolve(__dirname, 'templates/demo-template.html'),
+      filename: 'build/demo.html',
+      template: path.resolve(__dirname, 'lib/demo-template.html'),
       inject: true
     })
   ],
