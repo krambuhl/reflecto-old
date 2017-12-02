@@ -6,7 +6,7 @@
 import {
   createArchive,
   createSchema,
-  registerHelpers,
+  registerHandlbarsHelpers,
   archiveHelpers
 } from 'reflecto-archive'
 
@@ -21,7 +21,7 @@ const {
   pageStrategy
 } = archiveHelpers
 
-registerHelpers(Handlebars)
+registerHandlbarsHelpers(Handlebars)
 
 const fileContext = require.context('./', true, /(.vue|.data.js|.md)$/)
 const files = fileContext.keys()
