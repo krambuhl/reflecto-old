@@ -3,8 +3,8 @@
   "license": "MIT",
   "scripts": {
     "start": "serve dist",
-    "dev": "webpack --watch --progress --hot --config build/webpack.config.dev.js",
-    "build": "webpack --progress --config build/webpack.config.js",
+    "dev": "webpack --config webpack.config.dev.js--progress --watch --hot",
+    "build": "webpack --config webpack.config.js --progress",
     "watch": "gulp watch"
   },
   "devDependencies": {
